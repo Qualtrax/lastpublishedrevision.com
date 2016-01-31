@@ -1,0 +1,29 @@
+@import "../../lib/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.progress-bar-outdated {
+  @include progress-bar-variant($red);
+}
+
+.progress-bar-average {
+  @include progress-bar-variant($darkGray);
+}
+
+.progress-bar-past {
+  @include progress-bar-variant($green);
+}
+
+.progress-bar-edit {
+  @include progress-bar-variant($darkGray);
+}
+
+.label-released {
+    @include label-variant($green);
+    font-weight: 500;
+    padding: .8em 1.6em .8em;
+}
+
+.label-outdated {
+    @include label-variant($red);
+    font-weight: 500;
+    padding: .8em 1.6em .8em;
+}

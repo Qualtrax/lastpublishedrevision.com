@@ -1,0 +1,115 @@
+@import "variables";
+@import "customBootstrap";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;    
+    color: $darkGray;
+}
+
+img.logo {
+    margin-bottom: -30px;
+    width: 80%;
+}
+
+.current-release-count {
+    float: right; 
+    font-weight: 500;
+    font-size: 34px;
+}
+
+.release-count {
+    float: right; 
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.count-outdated {
+    color: $red;
+}
+
+.count-edit {
+    color: $lightGray;  
+}
+
+.release-month {
+    margin: 0 0 -20px 0;
+    font-weight: 400;
+    width: 50%;
+}
+
+.logo-container {
+    // text-align: right;
+}
+
+.logo-title {
+    font-size: 50px;
+    margin-bottom: -5px;
+}
+
+.progress-section {
+    border-bottom: 1px solid #D9D9D9;
+    margin-top: 40px;
+}
+
+.release-status {
+    display: block;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 80px;
+}
+
+.release-status-recent {
+    @extend .release-status;
+    background-color: $green;
+}
+
+.release-status-coming {
+    @extend .release-status;
+    background-color: $red;
+}
+
+.release-check {
+    margin-right: 10px;
+}
+
+.display-label {
+    display: inline-block;
+}
+
+footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 50px;
+    color: #99979c;
+    text-align: center;
+    background-color: $darkGray;
+}
+
+.title-row {
+    margin-top: 20px;
+}
+
+.something {
+    border-left-style: solid;
+    border-left-color: $lightGray;
+    padding-left: 34px;
+    text-align: left;
+}
+
+.progress-bar-container {
+    width: 85%; 
+    margin-top: 25px;
+    > .progress {
+        height: 13px;
+    }
+}
+
+.description-label {
+    font-size: 24px;
+    margin-top: 10px;
+}
