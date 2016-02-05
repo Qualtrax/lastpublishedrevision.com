@@ -6,8 +6,7 @@ Installs all dependencies (including bower)
 ```
 gulp.task('start', function () {
   nodemon({
-    script: 'server.js',
-    env: { 'GITHUB_ACCESS_TOKEN': 'token goes here' }
+    script: 'server.js'
   })
 });
 ```
