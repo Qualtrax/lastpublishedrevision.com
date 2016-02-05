@@ -1,0 +1,40 @@
+{
+  "name": "lastpublishedrevision.com",
+  "version": "1.0.0",
+  "description": "Run using the official node container, replacing {ACCESS_TOKEN} with a GitHub Personal Access Token.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "postinstall": "node_modules/.bin/bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Qualtrax/lastpublishedrevision.com.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Qualtrax/lastpublishedrevision.com.git"
+  },
+  "homepage": "https://github.com/Qualtrax/lastpublishedrevision.com#readme",
+  "devDependencies": {
+    "async": "^1.5.2",
+    "body-parser": "^1.14.2",
+    "bower": "^1.7.7",
+    "express": "^4.13.4",
+    "github": "^0.2.4",
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-ng-config": "^1.2.1",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-sass": "^2.1.1",
+    "jshint": "^2.9.1",
+    "method-override": "^2.3.5",
+    "morgan": "^1.6.1",
+    "nconf": "^0.8.4",
+    "nodemon": "^1.8.1",
+    "octokat": "^0.4.16",
+    "request": "^2.69.0"
+  }
+}
