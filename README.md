@@ -1,5 +1,19 @@
-Run using the official node container, replacing {ACCESS_TOKEN} with a GitHub Personal Access Token.
+```
+npm install
+```
+Installs all dependencies (including bower)
 
 ```
-docker run -d -p 8080:8080 -v "$PWD":/usr/src/app -e "GITHUB_ACCESS_TOKEN={ACCESS_TOKEN}" -w /usr/src/app node:5 node server.js
+gulp.task('start', function () {
+  nodemon({
+    script: 'server.js',
+    env: { 'GITHUB_ACCESS_TOKEN': 'token goes here' }
+  })
+});
 ```
+Add GitHub access token to the gulp file.
+
+```
+gulp start
+```
+Starts the node server on port 8080.
