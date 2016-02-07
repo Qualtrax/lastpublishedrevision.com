@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head>
         <meta charset="utf-8">
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Last Published Revision</title>
 
         <link href="content/css/styles.css" rel="stylesheet">
@@ -13,40 +13,40 @@
         <div class="container">
 
             <div class="row title-row">
-                <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 logo-container">
+                <div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">
                     <img class="img-responsive center-block logo" src="content/images/LastPublishedRevisionQsmall.png" alt="">
                 </div>
             </div>
             
-            <div class="row" ng-show="vm.showData">
-                <div class="col-md-4 col-md-offset-4">
+            <div class="row" ng-cloak ng-show="vm.showData">
+                <div class="col-md-4 col-md-offset-4" ng-cloak ng-hide="vm.releaseLabel === 'label-edit'">
                     <div class="release-status center-block">
                         <h3>
-                            <span class="label label-success" ng-class="vm.releaseIsSoon ? 'label-outdated' : 'label-released'">
-                                <span class="glyphicon release-check"  aria-hidden="true"></span>{{vm.releaseIsSoon ? 'About to Release' : 'Just Released'}}
+                            <span class="label" ng-cloak ng-class="vm.releaseLabel">
+                                {{vm.releaseLabelText}}
                             </span>
                         </h3>
                     </div>
                 </div>
             </div>
 
-            <div class="row" ng-show="vm.showData">
-                <div class="progress-section col-md-8 col-md-offset-2 col-sm-12">
+            <div class="row" ng-cloak ng-show="vm.showData">
+                <div class="progress-section col-md-8 col-md-offset-2 col-xs-12">
                     
                     <div class="pull-left">
                         <p class="description-label">Days in edit</p>
                     </div>
                     
-                    <div class="pull-right col-md-7 col-sm-12" >
-                        <div class="current-release-count" ng-class="vm.isOverAverage ? 'count-outdated' : 'count-edit'"">
+                    <div class="pull-right col-md-7 col-xs-12" >
+                        <div ng-cloak class="current-release-count" ng-class="vm.aboutToRelease ? 'count-outdated' : 'count-edit'"">
                             {{vm.currentRelease.daysSinceLastRelease}}
                         </div>
-                        <div class="release-month">
+                        <div ng-cloak class="release-month">
                             {{vm.currentRelease.dateMonthYear}}
                         </div>
                         <div class="progress-bar-container pull-left">
                             <div class="progress">
-                                <div class="progress-bar"  ng-class="vm.isOverAverage ? 'progress-bar-outdated' : 'progress-bar-edit'" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.getReleasePercentage(vm.currentRelease.daysSinceLastRelease)}}%">
+                                <div ng-cloak class="progress-bar"  ng-class="vm.aboutToRelease ? 'progress-bar-outdated' : 'progress-bar-edit'" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.getReleasePercentage(vm.currentRelease.daysSinceLastRelease)}}%">
                                 </div>
                             </div>
                         </div>
@@ -56,18 +56,18 @@
             </div>
 
 
-            <div class="row" ng-show="vm.showData">
-                <div class="progress-section col-md-8 col-md-offset-2 col-sm-12">
+            <div class="row" ng-cloak ng-show="vm.showData">
+                <div class="progress-section col-md-8 col-md-offset-2 col-xs-12">
                     <div class="pull-left">
                         <div class="description-label">Average</div>
                     </div>
-                    <div class="pull-right col-md-7 col-sm-12">
-                        <div class="release-count">
+                    <div class="pull-right col-md-7 col-xs-12">
+                        <div ng-cloak class="release-count">
                             {{vm.averageReleaseTime}}
                         </div>
                         <div class="progress-bar-container pull-left">
                             <div class="progress">
-                                <div class="progress-bar progress-bar-average" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.getReleasePercentage(vm.averageReleaseTime)}}%">
+                                <div ng-cloak class="progress-bar progress-bar-average" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.getReleasePercentage(vm.averageReleaseTime)}}%">
                                 </div>
                             </div>
                         </div>
@@ -75,22 +75,22 @@
                 </div>
             </div>
 
-            <div class="row" ng-show="vm.showData">
-                <div class="progress-section col-md-8 col-md-offset-2 col-sm-12">
+            <div class="row" ng-cloak ng-show="vm.showData">
+                <div class="history-section col-md-8 col-md-offset-2 col-xs-12">
                     <div class="pull-left">
                         <p class="description-label">History</p>
                     </div>
 
-                    <div ng-repeat="release in vm.releases" class="pull-right col-md-7 col-sm-12">
-                        <div class="release-count">
+                    <div ng-repeat="release in vm.releases" class="pull-right col-md-7 col-xs-12">
+                        <div ng-cloak class="release-count">
                             {{release.daysSinceLastRelease}}
                         </div>
-                        <div class="release-month">
+                        <div ng-cloak class="release-month">
                             {{release.name}}
                         </div>
                         <div class="progress-bar-container pull-left">
                             <div class="progress">
-                                <div class="progress-bar progress-bar-past" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.getReleasePercentage(release.daysSinceLastRelease)}}%">
+                                <div ng-cloak class="progress-bar progress-bar-past" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.getReleasePercentage(release.daysSinceLastRelease)}}%">
                                 </div>
                             </div>
                         </div>
@@ -99,10 +99,6 @@
             </div>
             
         </div>
-        
-        <footer ng-show="vm.showData" class="hidden-sm">
-            
-        </footer>
 
         <script src="lib/jquery/dist/jquery.min.js"></script>
         <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>

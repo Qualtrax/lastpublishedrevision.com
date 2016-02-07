@@ -1,19 +1,23 @@
 @import "../../lib/bootstrap-sass/assets/stylesheets/bootstrap";
 
 .progress-bar-outdated {
-  @include progress-bar-variant($red);
+    @include progress-bar-variant($red);
+    border-radius: 10px 10px 10px 10px;
 }
 
 .progress-bar-average {
-  @include progress-bar-variant($darkGray);
+    @include progress-bar-variant($darkGray);
+    border-radius: 10px 10px 10px 10px;
 }
 
 .progress-bar-past {
-  @include progress-bar-variant($green);
+    @include progress-bar-variant($green);
+    border-radius: 10px 10px 10px 10px;
 }
 
 .progress-bar-edit {
-  @include progress-bar-variant($darkGray);
+    @include progress-bar-variant($darkGray);
+    border-radius: 10px 10px 10px 10px;
 }
 
 .label-released {

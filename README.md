@@ -4,13 +4,9 @@ npm install
 Installs all dependencies (including bower)
 
 ```
-gulp.task('start', function () {
-  nodemon({
-    script: 'server.js'
-  })
-});
+GITHUB_ACCESS_TOKEN={insert token}
 ```
-Add GitHub access token to the gulp file.
+Add GitHub access token as environment variable
 
 ```
 gulp start

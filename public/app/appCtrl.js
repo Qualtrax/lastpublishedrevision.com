@@ -9,6 +9,9 @@
 
     function AppCtrl($q, dateService, mathService, gitHubService, qualtraxReleaseService) {
         var vm = this;
+        var aboutToReleaseLabelText = 'About to Release';
+        var justReleasedLabelText = 'Just Released';
+        
         vm.releases = [];
         vm.getReleasePercentage = getReleasePercentage;
         vm.showData = false;
@@ -80,14 +83,17 @@
             };
             var releaseTimes = getAllReleaseTimes(releaseData);
             var average = mathService.getAverage(releaseTimes);
+            var releaseStatus = getReleaseStatus(releaseTimes, currentRelease);;
             
             vm.releases = releaseData;
             vm.currentRelease = currentRelease;
             vm.averageReleaseTime = average;
             vm.highestReleaseTime = mathService.getMax(releaseTimes);
-            vm.releaseIsSoon = mathService.isWithinStandardDeviation(releaseTimes, currentRelease.daysSinceLastRelease, 2);
+            vm.releaseLabel = getReleaseLabelClass(releaseStatus);
+            vm.releaseLabelText = getReleaseStatus(releaseTimes, currentRelease);
+            vm.aboutToRelease = vm.releaseLabelText === aboutToReleaseLabelText;
+            
             vm.showData = true;
-            vm.isOverAverage = currentRelease.daysSinceLastRelease > average;
         }
         
         function getCommit(commits, sha) {
@@ -107,6 +113,31 @@
         
         function getReleasePercentage(days) {
             return days / vm.highestReleaseTime * 100;
+        }
+        
+        function getReleaseStatus(releaseTimes, currentRelease) {
+            var justReleased = !mathService.isWithinStandardDeviation(releaseTimes, currentRelease.daysSinceLastRelease, 2);
+            
+            if (justReleased) {
+                return justReleasedLabelText;
+            }
+            else {
+                var releaseIsSoon = mathService.isWithinStandardDeviation(releaseTimes, currentRelease.daysSinceLastRelease, 1);
+                if (releaseIsSoon) {
+                    return aboutToReleaseLabelText;
+                }
+            }
+            
+            return '';
+        }
+        
+        function getReleaseLabelClass(releaseStatus) {
+            if (releaseStatus === justReleasedLabelText)
+                return 'label-released';
+            if (releaseStatus === aboutToReleaseLabelText)
+                return 'label-outdated';
+            
+            return 'label-edit';
         }
     }
 })();
