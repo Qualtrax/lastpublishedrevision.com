@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Last Published Revision</title>
 
+        <link href="lib/emojify.js/dist/css/basic/emojify.min.css" rel="stylesheet" type="text/css">
         <link href="content/css/styles.css" rel="stylesheet">
     </head>
 
@@ -19,13 +20,14 @@
             </div>
             
             <div class="row" ng-cloak ng-show="vm.showData">
-                <div class="col-md-4 col-md-offset-4" ng-cloak ng-hide="vm.releaseLabel === 'label-edit'">
+                <div class="col-md-4 col-md-offset-4" ng-cloak ng-hide="vm.noBadge">
                     <div class="release-status center-block">
-                        <h3>
-                            <span class="label" ng-cloak ng-class="vm.releaseLabel">
-                                {{vm.releaseLabelText}}
-                            </span>
-                        </h3>
+                            <div ng-if="vm.justReleased" class="label label-released" ng-cloak>
+                                Just Released :tada:
+                            </div>
+                            <div ng-if="vm.aboutToRelease" class="label label-outdated" ng-cloak>
+                                Releasing Coming Soon
+                            </div>
                     </div>
                 </div>
             </div>
@@ -46,7 +48,7 @@
                         </div>
                         <div class="progress-bar-container pull-left">
                             <div class="progress">
-                                <div ng-cloak class="progress-bar"  ng-class="vm.aboutToRelease ? 'progress-bar-outdated' : 'progress-bar-edit'" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.getReleasePercentage(vm.currentRelease.daysSinceLastRelease)}}%">
+                                <div ng-cloak class="progress-bar"  ng-class="vm.aboutToRelease ? 'progress-bar-outdated' : 'progress-bar-edit'" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: vm.getReleasePercentage(vm.currentRelease.daysSinceLastRelease)}">
                                 </div>
                             </div>
                         </div>
@@ -67,7 +69,7 @@
                         </div>
                         <div class="progress-bar-container pull-left">
                             <div class="progress">
-                                <div ng-cloak class="progress-bar progress-bar-average" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.getReleasePercentage(vm.averageReleaseTime)}}%">
+                                <div ng-cloak class="progress-bar progress-bar-average" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: vm.getReleasePercentage(vm.averageReleaseTime)}">
                                 </div>
                             </div>
                         </div>
@@ -90,7 +92,7 @@
                         </div>
                         <div class="progress-bar-container pull-left">
                             <div class="progress">
-                                <div ng-cloak class="progress-bar progress-bar-past" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.getReleasePercentage(release.daysSinceLastRelease)}}%">
+                                <div ng-cloak class="progress-bar progress-bar-past" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: vm.getReleasePercentage(release.daysSinceLastRelease)}">
                                 </div>
                             </div>
                         </div>
@@ -99,9 +101,26 @@
             </div>
             
         </div>
-
+        
+        <footer ng-cloak ng-show="vm.showData">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 footer-links col-xs-12">
+                        <a href="www.qualtrax.com"><img class="footer-logo" src="content/images/Q.png" alt="qualtrax.com"></a>
+                        <a href="https://support.qualtrax.com" class="footer-link">Support</a>
+                        <a href="http://www.qualtrax.com/blog" class="footer-link">The Qualtrax Blog</a>
+                        <a href="https://support.qualtrax.com/downloads" class="footer-link">Upgrade Now</a> 
+                    </div>
+                    <div class="col-md-3 col-md-offset-3 footer-links">
+                        <p>© 2016 Qualtrax All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+       
         <script src="lib/jquery/dist/jquery.min.js"></script>
         <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="lib/emojify.js/dist/js/emojify.min.js"></script>
 
         <script src="lib/angular/angular.js"></script>
         <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -113,5 +132,9 @@
         <script src="app/dateService.js"></script>
         <script src="app/githubService.js"></script>
         <script src="app/qualtraxReleaseService.js"></script>
+        <script>
+            emojify.setConfig({emojify_tag_type:'div', img_dir: 'lib/emojify.js/dist/images/basic'});
+            emojify.run();
+        </script>
     </body>
 </html>
