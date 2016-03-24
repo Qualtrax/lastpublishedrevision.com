@@ -8,6 +8,19 @@ body {
     color: $darkGray;
 }
 
+html, body {
+    height: 100%;
+}
+
+.main-wrapper {
+    min-height: 100%;
+    position:relative;
+}
+
+.main-content {
+    padding-bottom: 60px; 
+}
+
 img.logo {
     margin-bottom: 20px;
     width: 80%;
@@ -52,6 +65,7 @@ img.logo {
 
 .history-section {
     margin-top: 4%;
+    margin-bottom: 7%;
 }
 
 .release-status {
@@ -105,7 +119,13 @@ footer {
     margin-top: 10px;
 }
 
-footer {
+.footer {
+    height: 60px; 
+    width:100%;
+    position: absolute;
+    left: 0;
+    bottom: 0; 
+    
     clear: both;
     padding: 0 0 12px;
     font-size: 13px;

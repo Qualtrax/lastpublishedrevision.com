@@ -10,113 +10,118 @@
     </head>
 
     <body ng-app="app" ng-controller="appCtrl as vm">
+        <div class="main-wrapper">
+            <div class="main-content">
+                <div class="container">
 
-        <div class="container">
+                    <div class="row title-row">
+                        <div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">
+                            <img class="img-responsive center-block logo" src="content/images/LastPublishedRevisionQsmall.png" alt="">
+                        </div>
+                    </div>
+                    
+                    <div class="row" ng-cloak ng-show="vm.showData">
+                        <div class="col-md-4 col-md-offset-4" ng-cloak ng-hide="vm.noBadge">
+                            <div class="release-status center-block">
+                                    <div ng-if="vm.justReleased" class="label label-released" ng-cloak>
+                                        Just Released :tada:
+                                    </div>
+                                    <div ng-if="vm.aboutToRelease" class="label label-outdated" ng-cloak>
+                                        Release Coming Soon
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="row title-row">
-                <div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">
-                    <img class="img-responsive center-block logo" src="content/images/LastPublishedRevisionQsmall.png" alt="">
+                    <div class="row" ng-cloak ng-show="vm.showData">
+                        <div class="progress-section col-md-8 col-md-offset-2 col-xs-12">
+                            
+                            <div class="pull-left">
+                                <p class="description-label">Days in edit</p>
+                            </div>
+                            
+                            <div class="pull-right col-md-7 col-xs-12" >
+                                <div ng-cloak class="current-release-count" ng-class="vm.aboutToRelease ? 'count-outdated' : 'count-edit'"">
+                                    {{vm.currentRelease.daysSinceLastRelease}}
+                                </div>
+                                <div ng-cloak class="release-month">
+                                    {{vm.currentRelease.dateMonthYear}}
+                                </div>
+                                <div class="progress-bar-container pull-left">
+                                    <div class="progress">
+                                        <div ng-cloak class="progress-bar"  ng-class="vm.aboutToRelease ? 'progress-bar-outdated' : 'progress-bar-edit'" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: vm.getReleasePercentage(vm.currentRelease.daysSinceLastRelease)}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="row" ng-cloak ng-show="vm.showData">
+                        <div class="progress-section col-md-8 col-md-offset-2 col-xs-12">
+                            <div class="pull-left">
+                                <div class="description-label">Average</div>
+                            </div>
+                            <div class="pull-right col-md-7 col-xs-12">
+                                <div ng-cloak class="release-count">
+                                    {{vm.averageReleaseTime}}
+                                </div>
+                                <div class="progress-bar-container pull-left">
+                                    <div class="progress">
+                                        <div ng-cloak class="progress-bar progress-bar-average" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: vm.getReleasePercentage(vm.averageReleaseTime)}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-cloak ng-show="vm.showData">
+                        <div class="history-section col-md-8 col-md-offset-2 col-xs-12">
+                            <div class="pull-left">
+                                <p class="description-label">History</p>
+                            </div>
+
+                            <div ng-repeat="release in vm.releases" class="pull-right col-md-7 col-xs-12">
+                                <div ng-cloak class="release-count">
+                                    {{release.daysSinceLastRelease}}
+                                </div>
+                                <div ng-cloak class="release-month">
+                                    {{release.name}}
+                                </div>
+                                <div class="progress-bar-container pull-left">
+                                    <div class="progress">
+                                        <div ng-cloak class="progress-bar progress-bar-past" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: vm.getReleasePercentage(release.daysSinceLastRelease)}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             
-            <div class="row" ng-cloak ng-show="vm.showData">
-                <div class="col-md-4 col-md-offset-4" ng-cloak ng-hide="vm.noBadge">
-                    <div class="release-status center-block">
-                            <div ng-if="vm.justReleased" class="label label-released" ng-cloak>
-                                Just Released :tada:
-                            </div>
-                            <div ng-if="vm.aboutToRelease" class="label label-outdated" ng-cloak>
-                                Release Coming Soon
-                            </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" ng-cloak ng-show="vm.showData">
-                <div class="progress-section col-md-8 col-md-offset-2 col-xs-12">
-                    
-                    <div class="pull-left">
-                        <p class="description-label">Days in edit</p>
-                    </div>
-                    
-                    <div class="pull-right col-md-7 col-xs-12" >
-                        <div ng-cloak class="current-release-count" ng-class="vm.aboutToRelease ? 'count-outdated' : 'count-edit'"">
-                            {{vm.currentRelease.daysSinceLastRelease}}
-                        </div>
-                        <div ng-cloak class="release-month">
-                            {{vm.currentRelease.dateMonthYear}}
-                        </div>
-                        <div class="progress-bar-container pull-left">
-                            <div class="progress">
-                                <div ng-cloak class="progress-bar"  ng-class="vm.aboutToRelease ? 'progress-bar-outdated' : 'progress-bar-edit'" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: vm.getReleasePercentage(vm.currentRelease.daysSinceLastRelease)}">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-
-
-            <div class="row" ng-cloak ng-show="vm.showData">
-                <div class="progress-section col-md-8 col-md-offset-2 col-xs-12">
-                    <div class="pull-left">
-                        <div class="description-label">Average</div>
-                    </div>
-                    <div class="pull-right col-md-7 col-xs-12">
-                        <div ng-cloak class="release-count">
-                            {{vm.averageReleaseTime}}
-                        </div>
-                        <div class="progress-bar-container pull-left">
-                            <div class="progress">
-                                <div ng-cloak class="progress-bar progress-bar-average" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: vm.getReleasePercentage(vm.averageReleaseTime)}">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" ng-cloak ng-show="vm.showData">
-                <div class="history-section col-md-8 col-md-offset-2 col-xs-12">
-                    <div class="pull-left">
-                        <p class="description-label">History</p>
-                    </div>
-
-                    <div ng-repeat="release in vm.releases" class="pull-right col-md-7 col-xs-12">
-                        <div ng-cloak class="release-count">
-                            {{release.daysSinceLastRelease}}
-                        </div>
-                        <div ng-cloak class="release-month">
-                            {{release.name}}
-                        </div>
-                        <div class="progress-bar-container pull-left">
-                            <div class="progress">
-                                <div ng-cloak class="progress-bar progress-bar-past" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: vm.getReleasePercentage(release.daysSinceLastRelease)}">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
+            <div class="footer" ng-cloak ng-show="vm.showData">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 footer-links col-xs-12">
+                            <a href="http://www.qualtrax.com"><img class="footer-logo" src="content/images/Q.png" alt="qualtrax.com"></a>
+                            <a href="https://support.qualtrax.com" class="footer-link">Support</a>
+                            <a href="http://www.qualtrax.com/blog" class="footer-link">The Qualtrax Blog</a>
+                            <a href="https://support.qualtrax.com/downloads" class="footer-link">Upgrade Now</a> 
+                        </div>
+                        <div class="col-md-3 col-md-offset-3 col-xs-12 footer-links">
+                            <p>© 2016 Qualtrax All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <footer ng-cloak ng-show="vm.showData">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 footer-links col-xs-12">
-                        <a href="http://www.qualtrax.com"><img class="footer-logo" src="content/images/Q.png" alt="qualtrax.com"></a>
-                        <a href="https://support.qualtrax.com" class="footer-link">Support</a>
-                        <a href="http://www.qualtrax.com/blog" class="footer-link">The Qualtrax Blog</a>
-                        <a href="https://support.qualtrax.com/downloads" class="footer-link">Upgrade Now</a> 
-                    </div>
-                    <div class="col-md-3 col-md-offset-3 col-xs-12 footer-links">
-                        <p>© 2016 Qualtrax All rights reserved.</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
        
         <script src="lib/jquery/dist/jquery.min.js"></script>
         <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
