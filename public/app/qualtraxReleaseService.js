@@ -19,8 +19,8 @@ function qualtraxReleaseService() {
     return service;
 
     function isMajorRelease(tagName) {
-        var releaseFormat = /.*0\.0$/;
-        var legacyReleaseFormat = /.*\.0$/;
+        var releaseFormat = /\.0\.0$/;
+        var legacyReleaseFormat = /\d{2}\.0/;
         
         if (releaseFormat.test(tagName))
             return true;
